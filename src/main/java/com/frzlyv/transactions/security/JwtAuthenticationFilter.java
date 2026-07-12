@@ -1,7 +1,11 @@
 package com.frzlyv.transactions.security;
 
 import java.io.IOException;
+import java.util.Collections;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -43,7 +47,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // Extract username claim from token
     username = jwtService.extractUsername(jwt);
 
-    System.out.println("Filter intercepted valid header! Extracted username: " + username);
+    // Authenticate if we have username && not already authenticated
+    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+      UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+          username, // User identity
+          null, // Credentials (We don't need passwords for stateless JWT validation)
+          Collections.emptyList()); // Authorities/Roles
+
+      // Build details from request metadata
+      authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+      // Update the security context with new data
+      SecurityContextHolder.getContext().setAuthentication(authToken);
+    }
 
     // Pass the request to next filter
     filterChain.doFilter(request, response);
