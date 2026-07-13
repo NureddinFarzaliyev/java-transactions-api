@@ -30,4 +30,9 @@ public class AuthController {
     return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(registerDto));
   }
 
+  @PostMapping("/login")
+  public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
+    return ResponseEntity.status(HttpStatus.OK).body(userService.login(loginDto));
+  }
+
 }
