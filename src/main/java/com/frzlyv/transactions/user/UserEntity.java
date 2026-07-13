@@ -39,7 +39,8 @@ public class UserEntity implements UserDetails {
   @Column(nullable = false)
   private String password;
 
-  private String role;
+  @Builder.Default
+  private String role = "USER";
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,5 +1,7 @@
 package com.frzlyv.transactions.auth;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +26,8 @@ public class AuthController {
   }
 
   @PostMapping("/register")
-  public UserDto register(@Valid @RequestBody RegisterDto registerDto) {
-    return userService.register(registerDto);
+  public ResponseEntity<UserDto> register(@Valid @RequestBody RegisterDto registerDto) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(registerDto));
   }
 
 }

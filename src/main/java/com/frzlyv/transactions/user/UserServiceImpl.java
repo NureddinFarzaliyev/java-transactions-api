@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         .builder()
         .email(registerDto.getEmail())
         .password(passwordEncoder.encode(registerDto.getPassword()))
+        .role(registerDto.getRole() != null ? registerDto.getRole() : "USER")
         .build();
 
     UserEntity savedUser = userRepository.save(user);
