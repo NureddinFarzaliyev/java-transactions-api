@@ -1,12 +1,14 @@
 package com.frzlyv.transactions.user;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import com.frzlyv.transactions.shared.Mapper;
 
 /**
  * UserMapper
  */
+@Component
 public class UserMapper implements Mapper<UserEntity, UserDto> {
 
   private final ModelMapper modelMapper;

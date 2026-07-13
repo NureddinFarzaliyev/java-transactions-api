@@ -33,8 +33,10 @@ public class SecurityConfig {
         // stateless APIs using tokens don't use cookie-based sessions, so disable csrf
         .csrf(csrf -> csrf.disable())
         // Define URL Auth rules
-        .authorizeHttpRequests(
-            auth -> auth.requestMatchers("/actuator/health").permitAll().anyRequest().authenticated())
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/actuator/health").permitAll()
+            .requestMatchers("/api/v1/auth/register").permitAll()
+            .anyRequest().authenticated())
         // Do not create or store HTTP sessions
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // add custom jwt filter before the default username-password filter
