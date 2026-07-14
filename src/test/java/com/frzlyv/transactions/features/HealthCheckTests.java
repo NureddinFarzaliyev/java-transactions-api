@@ -1,4 +1,4 @@
-package com.frzlyv.transactions.health;
+package com.frzlyv.transactions.features;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,11 +14,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HealthCheckTest {
+public class HealthCheckTests {
 
   private MockMvc mockMvc;
 
-  public HealthCheckTest(MockMvc mockMvc) {
+  public HealthCheckTests(MockMvc mockMvc) {
     this.mockMvc = mockMvc;
   }
 
