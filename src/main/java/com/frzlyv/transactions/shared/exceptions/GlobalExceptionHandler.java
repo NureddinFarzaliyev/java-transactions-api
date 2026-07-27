@@ -44,4 +44,11 @@ public class GlobalExceptionHandler {
     return ResponseEntity.badRequest().body(buildErrorResponse(List.of(ex.getMessage())));
   }
 
+  @ExceptionHandler(EntityDoesNotExistException.class)
+  public ResponseEntity<Map<String, Object>> handleEntityDoesNotExists(EntityDoesNotExistException ex) {
+    return ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .body(buildErrorResponse(List.of(ex.getMessage())));
+  }
+
 }
