@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.frzlyv.transactions.shared.Mapper;
+import com.frzlyv.transactions.shared.exceptions.CannotDeleteBecauseOfConflictException;
 import com.frzlyv.transactions.shared.exceptions.EntityDoesNotExistException;
+import com.frzlyv.transactions.transaction.TransactionRepository;
 import com.frzlyv.transactions.user.UserEntity;
 import com.frzlyv.transactions.user.UserRepository;
 
@@ -22,6 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
   private final Mapper<CategoryEntity, CategoryDto> modelMapper;
   private final CategoryRepository categoryRepository;
   private final UserRepository userRepository;
+  private final TransactionRepository transactionRepository;
 
   @Override
   public CategoryDto createCategory(UserEntity currentUser, CreateCategoryDto createCategoryDto) {
@@ -56,6 +59,9 @@ public class CategoryServiceImpl implements CategoryService {
   public void deleteCategory(Long id, UserEntity currentUser) {
     if (!categoryRepository.existsByIdAndUserId(id, currentUser.getId())) {
       throw new EntityDoesNotExistException("Category does not exists.");
+    }
+    if (transactionRepository.existsByUserIdAndCategoryId(currentUser.getId(), id)) {
+      throw new CannotDeleteBecauseOfConflictException("This category has transactions.");
     }
     categoryRepository.deleteByIdAndUserId(id, currentUser.getId());
   }

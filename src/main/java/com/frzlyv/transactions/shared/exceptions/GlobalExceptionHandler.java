@@ -51,4 +51,12 @@ public class GlobalExceptionHandler {
         .body(buildErrorResponse(List.of(ex.getMessage())));
   }
 
+  @ExceptionHandler(CannotDeleteBecauseOfConflictException.class)
+  public ResponseEntity<Map<String, Object>> handleCannotDeleteBecauseOfConflict(
+      CannotDeleteBecauseOfConflictException ex) {
+    return ResponseEntity
+        .status(HttpStatus.CONFLICT)
+        .body(buildErrorResponse(List.of(ex.getMessage())));
+  }
+
 }

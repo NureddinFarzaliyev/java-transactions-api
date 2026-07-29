@@ -18,6 +18,8 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
 
   List<TransactionEntity> findAllByUserId(Long userId);
 
+  boolean existsByUserIdAndCategoryId(Long userId, Long categoryId);
+
   Optional<TransactionEntity> findByIdAndUserId(Long id, Long userId);
 
   void deleteByIdAndUserId(Long id, Long userId);
