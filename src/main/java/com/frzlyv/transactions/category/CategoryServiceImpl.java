@@ -10,23 +10,18 @@ import com.frzlyv.transactions.user.UserEntity;
 import com.frzlyv.transactions.user.UserRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 /**
  * CategoryServiceImpl
  */
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-  private Mapper<CategoryEntity, CategoryDto> modelMapper;
-  private CategoryRepository categoryRepository;
-  private UserRepository userRepository;
-
-  public CategoryServiceImpl(Mapper<CategoryEntity, CategoryDto> modelMapper, CategoryRepository categoryRepository,
-      UserRepository userRepository) {
-    this.modelMapper = modelMapper;
-    this.categoryRepository = categoryRepository;
-    this.userRepository = userRepository;
-  }
+  private final Mapper<CategoryEntity, CategoryDto> modelMapper;
+  private final CategoryRepository categoryRepository;
+  private final UserRepository userRepository;
 
   @Override
   public CategoryDto createCategory(UserEntity currentUser, CreateCategoryDto createCategoryDto) {

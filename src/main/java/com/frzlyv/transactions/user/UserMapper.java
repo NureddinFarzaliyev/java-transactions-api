@@ -5,17 +5,16 @@ import org.springframework.stereotype.Component;
 
 import com.frzlyv.transactions.shared.Mapper;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * UserMapper
  */
+@RequiredArgsConstructor
 @Component
 public class UserMapper implements Mapper<UserEntity, UserDto> {
 
   private final ModelMapper modelMapper;
-
-  public UserMapper(ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-  }
 
   @Override
   public UserDto toDto(UserEntity entity) {

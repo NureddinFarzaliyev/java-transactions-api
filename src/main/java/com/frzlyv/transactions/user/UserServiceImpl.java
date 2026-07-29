@@ -3,7 +3,7 @@ package com.frzlyv.transactions.user;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.frzlyv.transactions.auth.LoginDto;
 import com.frzlyv.transactions.auth.LoginResponseDto;
@@ -12,10 +12,13 @@ import com.frzlyv.transactions.security.JwtService;
 import com.frzlyv.transactions.shared.Mapper;
 import com.frzlyv.transactions.shared.exceptions.UserAlreadyExistsException;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * UserServiceImpl
  */
-@Component
+@Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
@@ -23,15 +26,6 @@ public class UserServiceImpl implements UserService {
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
-
-  public UserServiceImpl(UserRepository userRepository, Mapper<UserEntity, UserDto> userMapper,
-      PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtService jwtService) {
-    this.userRepository = userRepository;
-    this.userMapper = userMapper;
-    this.passwordEncoder = passwordEncoder;
-    this.authenticationManager = authenticationManager;
-    this.jwtService = jwtService;
-  }
 
   @Override
   public UserDto register(RegisterDto registerDto) {

@@ -12,25 +12,19 @@ import com.frzlyv.transactions.user.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 /**
  * TransactionServiceImpl
  */
 @Service
+@RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-  private CategoryRepository categoryRepository;
-  private TransactionRepository transactionRepository;
-  private UserRepository userRepository;
-  private Mapper<TransactionEntity, TransactionDto> transactionMapper;
-
-  public TransactionServiceImpl(CategoryRepository categoryRepository, TransactionRepository transactionRepository,
-      UserRepository userRepository, Mapper<TransactionEntity, TransactionDto> transactionMapper) {
-    this.categoryRepository = categoryRepository;
-    this.transactionRepository = transactionRepository;
-    this.userRepository = userRepository;
-    this.transactionMapper = transactionMapper;
-  }
+  private final CategoryRepository categoryRepository;
+  private final TransactionRepository transactionRepository;
+  private final UserRepository userRepository;
+  private final Mapper<TransactionEntity, TransactionDto> transactionMapper;
 
   @Override
   public TransactionDto createTransaction(UserEntity currentUser, CreateTransactionDto createTransactionDto) {

@@ -11,19 +11,17 @@ import com.frzlyv.transactions.user.UserDto;
 import com.frzlyv.transactions.user.UserService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 /**
  * AuthController
  */
 @RestController
 @RequestMapping("/api/v1/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
   private final UserService userService;
-
-  public AuthController(UserService userService) {
-    this.userService = userService;
-  }
 
   @PostMapping("/register")
   public ResponseEntity<UserDto> register(@Valid @RequestBody RegisterDto registerDto) {

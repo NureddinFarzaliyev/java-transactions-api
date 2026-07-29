@@ -6,17 +6,16 @@ import org.springframework.stereotype.Component;
 
 import com.frzlyv.transactions.shared.Mapper;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * CategoryMapper
  */
 @Component
+@RequiredArgsConstructor
 public class CategoryMapper implements Mapper<CategoryEntity, CategoryDto> {
 
-  private ModelMapper modelMapper;
-
-  public CategoryMapper(ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-  }
+  private final ModelMapper modelMapper;
 
   @Override
   public CategoryDto toDto(CategoryEntity entity) {

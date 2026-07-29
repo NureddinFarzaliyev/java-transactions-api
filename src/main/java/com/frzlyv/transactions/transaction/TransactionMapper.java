@@ -5,17 +5,16 @@ import org.springframework.stereotype.Component;
 
 import com.frzlyv.transactions.shared.Mapper;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * TransactionMapper
  */
 @Component
+@RequiredArgsConstructor
 public class TransactionMapper implements Mapper<TransactionEntity, TransactionDto> {
 
-  ModelMapper modelMapper;
-
-  public TransactionMapper(ModelMapper modelMapper) {
-    this.modelMapper = modelMapper;
-  }
+  private final ModelMapper modelMapper;
 
   @Override
   public TransactionEntity toEntity(TransactionDto dto) {

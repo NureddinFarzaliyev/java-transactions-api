@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.frzlyv.transactions.user.UserEntity;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * CategoryController
  */
 @RestController
 @RequestMapping("/api/v1/categories")
+@RequiredArgsConstructor
 public class CategoryController {
 
-  private CategoryService categoryService;
-
-  public CategoryController(CategoryService categoryService) {
-    this.categoryService = categoryService;
-  }
+  private final CategoryService categoryService;
 
   @PostMapping("")
   public CategoryDto createCategory(@RequestBody CreateCategoryDto createCategoryDto,

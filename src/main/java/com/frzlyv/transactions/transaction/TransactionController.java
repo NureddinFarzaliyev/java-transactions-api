@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.frzlyv.transactions.user.UserEntity;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * TransactionController
  */
 @RestController
 @RequestMapping("/api/v1/transactions")
+@RequiredArgsConstructor
 public class TransactionController {
 
-  private TransactionService transactionService;
-
-  public TransactionController(TransactionService transactionService) {
-    this.transactionService = transactionService;
-  }
+  private final TransactionService transactionService;
 
   @PostMapping("")
   TransactionDto createTransaction(@RequestBody CreateTransactionDto createTransactionDto,
