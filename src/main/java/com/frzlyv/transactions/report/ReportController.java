@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/reports")
 @RequiredArgsConstructor
-public class ReportServiceController {
+public class ReportController {
 
   private final ReportService reportService;
 
